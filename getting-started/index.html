@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.7.0.797539453036">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.7.0.797543019182">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 3.7.0">
@@ -31,12 +31,12 @@
     <script data-cfasync="false">(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../assets/favicon.png" rel="icon">
-    <link href="../resources/css/retype.css?v=3.7.0.797539453036" rel="stylesheet">
+    <link href="../resources/css/retype.css?v=3.7.0.797543019182" rel="stylesheet">
 
-    <script data-cfasync="false" src="../resources/js/config.js?v=3.7.0.797539453036" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../resources/js/config.js?v=3.7.0.797543019182" data-turbo-eval="false" defer></script>
     <script data-cfasync="false" src="../resources/js/retype.js?v=3.7.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="../resources/js/lunr.js?v=3.7.0.797539453036" data-turbo-eval="false" defer></script>
-    <script id="prism-js" data-cfasync="false" src="../resources/js/prism.js?v=3.7.0.797539453036" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../resources/js/lunr.js?v=3.7.0.797543019182" data-turbo-eval="false" defer></script>
+    <script id="prism-js" data-cfasync="false" src="../resources/js/prism.js?v=3.7.0.797543019182" defer></script>
 
     <style>
 
@@ -270,7 +270,7 @@
 <td><doc-anchor-trigger to="#script-life-cycle">2. Script Life-cycle</doc-anchor-trigger></td>
 </tr>
 <tr>
-<td><doc-anchor-trigger to="#importing">3. Importing</doc-anchor-trigger></td>
+<td><doc-anchor-trigger to="#importing-and-requiring">3. Importing and Requiring</doc-anchor-trigger></td>
 </tr>
 <tr>
 <td><doc-anchor-trigger to="#constructors-and-instances">4. Constructors and Instances</doc-anchor-trigger></td>
@@ -296,12 +296,12 @@
 </doc-anchor-target>
 <p>There are a couple of things to keep in mind when using LuaLink.</p>
 <ul>
-<li>Each script is stored in a separate folder inside the <code v-pre>plugins/LuaLink/scripts</code> directory, and libraries are stored in the <code v-pre>plugins/LuaLink/libs</code> directory.<br />
-<sup>More about libraries can be found on the <strong><a href="../libraries/">Libraries</a></strong> page.</sup></li>
-<li>Entry point of the script (or library) is a file named <code v-pre>main.lua</code> or <code v-pre>init.lua</code>.<br />
-<sup>It doesn&#x27;t matter which file you choose as the entry point, but you should be consistent with your naming convention.</sup></li>
 <li>Script life-cycle can be managed using <code v-pre>/lualink load</code>, <code v-pre>/lualink unload</code> and <code v-pre>/lualink reload</code> commands.<br />
 <sup>More on this can be found on the <strong><a href="../commands/">Commands</a></strong> page.</sup></li>
+<li>Each script is stored in a separate folder inside the <code v-pre>plugins/LuaLink/scripts</code> directory, and libraries are stored in the <code v-pre>plugins/LuaLink/libs</code> directory.<br />
+<sup>More about libraries can be found on the <strong><a href="../libraries/">Libraries</a></strong> page.</sup></li>
+<li>Entry point of the script (or library) is a file named <code v-pre>main.lua</code>.<br />
+<sup>More files can be created and loaded using the <code v-pre>require</code> keyword.</sup></li>
 </ul>
 <br />
 <doc-anchor-target id="script-life-cycle">
@@ -314,12 +314,12 @@
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre class="language-lua"><code v-pre class="language-lua">-- Called after the script has been successfully loaded.
 script:onLoad(function()
-    script:logger:info(&quot;Script has been loaded.&quot;)
+    script.logger:info(&quot;Script has been loaded.&quot;)
 end)
 
 -- Called before the script is attempted to be unloaded.
 script:onUnload(function()
-    script:logger:info(&quot;Script is about to be unloaded.&quot;)
+    script.logger:info(&quot;Script is about to be unloaded.&quot;)
 end)</code></pre>
 </doc-codeblock></div>
 <br />
@@ -353,7 +353,8 @@ script:onLoad(function()
     counter:increment()
     counter:increment()
     -- Printing current value of the counter to the console.
-    script.logger.info(counter:get() ..</code></pre>
+    script.logger:info(counter:get() .. &quot; is the current value of the counter.&quot;)
+end)</code></pre>
 </doc-codeblock></div>
 <br />
 <doc-anchor-target id="constructors-and-instances">
@@ -364,9 +365,9 @@ script:onLoad(function()
 </doc-anchor-target>
 <p>New instances of Java classes can be created as follows.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-lua"><code v-pre class="language-lua">local Bukkit = import &quot;org.bukkit.Bukkit&quot;
-local Keyed = import &quot;net.kyori.adventure.key.Keyed&quot;
-local NamespacedKey = import &quot;org.bukkit.NamespacedKey&quot;
+<pre class="language-lua"><code v-pre class="language-lua">local Bukkit = import(&quot;org.bukkit.Bukkit&quot;)
+local Keyed = import(&quot;net.kyori.adventure.key.Keyed&quot;)
+local NamespacedKey = import(&quot;org.bukkit.NamespacedKey&quot;)
 
 script.onLoad(function()
     -- Creating new instance of NamespacedKey class.
@@ -376,7 +377,7 @@ script.onLoad(function()
     -- Checking if World is instance of Keyed. (SPOILER: IT IS)
     if (Keyed.class:isInstance(world) == true) then 
         -- Sending loaded chunks count to the console.
-        script.logger.info(&quot;World &quot; .. world:key():asString() .. &quot; has &quot; .. world:getChunkCount() .. &quot; chunks loaded.&quot;)
+        script.logger:info(&quot;World &quot; .. world:key():asString() .. &quot; has &quot; .. world:getChunkCount() .. &quot; chunks loaded.&quot;)
     end
 end)</code></pre>
 </doc-codeblock></div>
@@ -389,7 +390,7 @@ end)</code></pre>
 </doc-anchor-target>
 <p>Non-complex commands can be created with little effort using built-in API.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-lua"><code v-pre class="language-lua">local Bukkit = import &quot;org.bukkit.Bukkit&quot;
+<pre class="language-lua"><code v-pre class="language-lua">local Bukkit = import(&quot;org.bukkit.Bukkit&quot;)
 
 -- Function to handle command tab-completion.
 function onTabComplete(sender, alias, args)
@@ -441,29 +442,29 @@ end)</code></pre>
 </doc-anchor-target>
 <p>Scheduler can be used to register single-use, delayed or repeating tasks.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-lua"><code v-pre class="language-lua">-- Schedules task to be run on the next tick.
-script.run(function()
+<pre class="language-lua"><code v-pre class="language-lua">-- Schedules a task to be run on the next tick.
+scheduler:run(function()
     -- Whatever belongs to the task goes here.
 end)
 
--- Schedules task to be run after 20 ticks has passed. Task function parameter can be omitted if not used. 
-script.runDelayed(function(task)
+-- Schedules a task to be run after 20 ticks has passed. 
+scheduler:runLater(function()
     -- Whatever belongs to the task goes here.
 end, 20)
 
--- Schedules task to be run after 20 ticks has passed, and repeated every 160 ticks. Task function parameter can be omitted if not used. 
-script.runRepeating(function(task)
+-- Schedules a task to be run after 20 ticks has passed, and repeated every 160 ticks.
+scheduler:runRepeating(function()
     -- Whatever belongs to the task goes here.
 end, 20, 160)</code></pre>
 </doc-codeblock></div>
 <p>Tasks can also be run asynchronously, but please note that neither the Bukkit API nor the LuaLink API is guaranteed to be thread-safe.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre class="language-lua"><code v-pre class="language-lua">-- Schedules asynchronous task to be run on the next tick.
-script.runAsync(callback: () -&gt; void): void
--- Schedules asynchronous task to be run after {delay} ticks has passed. Task function parameter can be omitted if not used. 
-script.runDelayedAsync(callback: (task: BukkitTask) -&gt; void, delay: number): BukkitTask
--- Schedules task to be run after {delay} ticks has passed, and repeated every {period} ticks. Task function parameter can be omitted if not used. 
-script.runRepeatingAsync(callback: (task: BukkitTask) -&gt; void, delay: number, period: number): BukkitTask</code></pre>
+scheduler:runAsync(handler: () -&gt; void): BukkitTask
+-- Schedules asynchronous task to be run after {delay} ticks has passed.
+scheduler:runLaterAsync(handler: () -&gt; void, delay: number): BukkitTask
+-- Schedules task to be run after {delay} ticks has passed, and repeated every {period} ticks.
+scheduler:runRepeatingAsync(handler: () -&gt; void, delay: number, period: number): BukkitTask</code></pre>
 </doc-codeblock></div>
 
                                 

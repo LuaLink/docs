@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.7.0.797539453036">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.7.0.797543019182">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 3.7.0">
@@ -11,7 +11,7 @@
     <!-- Primary Meta Tags -->
     <title>Commands</title>
     <meta name="title" content="Commands">
-    <meta name="description" content="List of commands provided by LuaLink.">
+    <meta name="description" content="List of all commands and permissions provided by LuaLink.">
 
     <!-- Canonical -->
     <link rel="canonical" href="/commands/">
@@ -20,22 +20,22 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="/commands/">
     <meta property="og:title" content="Commands">
-    <meta property="og:description" content="List of commands provided by LuaLink.">
+    <meta property="og:description" content="List of all commands and permissions provided by LuaLink.">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="/commands/">
     <meta property="twitter:title" content="Commands">
-    <meta property="twitter:description" content="List of commands provided by LuaLink.">
+    <meta property="twitter:description" content="List of all commands and permissions provided by LuaLink.">
 
     <script data-cfasync="false">(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../assets/favicon.png" rel="icon">
-    <link href="../resources/css/retype.css?v=3.7.0.797539453036" rel="stylesheet">
+    <link href="../resources/css/retype.css?v=3.7.0.797543019182" rel="stylesheet">
 
-    <script data-cfasync="false" src="../resources/js/config.js?v=3.7.0.797539453036" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../resources/js/config.js?v=3.7.0.797543019182" data-turbo-eval="false" defer></script>
     <script data-cfasync="false" src="../resources/js/retype.js?v=3.7.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="../resources/js/lunr.js?v=3.7.0.797539453036" data-turbo-eval="false" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../resources/js/lunr.js?v=3.7.0.797543019182" data-turbo-eval="false" defer></script>
 
     <style>
 
@@ -244,40 +244,41 @@
         <span>Commands</span>
     </h1>
 </doc-anchor-target>
-<p>List of commands provided by LuaLink.</p>
+<p>List of all commands and permissions provided by LuaLink.</p>
 <div class="table-wrapper scrollbar overflow-hidden">
-<table class="compact">
+<table class="comfortable">
 <thead>
 <tr>
 <th>Command</th>
 <th>Permission</th>
-<th>Description </th>
+<th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code v-pre>/lualink load &lt;script&gt;</code></td>
-<td>lualink.command.lualink.load</td>
+<td><code v-pre>/lualink load (script)</code></td>
+<td>lualink.command.load</td>
 <td>Loads specified Lua script.</td>
 </tr>
 <tr>
-<td><code v-pre>/lualink unload &lt;script&gt;</code></td>
-<td>lualink.command.lualink.unload</td>
+<td><code v-pre>/lualink unload (script)</code></td>
+<td>lualink.command.unload</td>
 <td>Unloads specified Lua script.</td>
 </tr>
 <tr>
-<td><code v-pre>/lualink reload &lt;script&gt;</code></td>
-<td>lualink.command.lualink.reload</td>
+<td><code v-pre>/lualink reload (script)</code></td>
+<td>lualink.command.reload</td>
 <td>Reloads specified Lua script.</td>
 </tr>
 <tr>
 <td><code v-pre>/lualink list</code></td>
-<td>lualink.command.lualink.list</td>
+<td>lualink.command.list</td>
 <td>Lists all loaded Lua scripts.</td>
 </tr>
 </tbody>
 </table>
 </div>
+<p>Please be cautious and give access to these commands only to people you trust.</p>
 
                                 
                                 <!-- Required only on API pages -->

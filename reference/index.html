@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.7.0.797539453036">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.7.0.797543019182">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 3.7.0">
@@ -31,12 +31,12 @@
     <script data-cfasync="false">(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../assets/favicon.png" rel="icon">
-    <link href="../resources/css/retype.css?v=3.7.0.797539453036" rel="stylesheet">
+    <link href="../resources/css/retype.css?v=3.7.0.797543019182" rel="stylesheet">
 
-    <script data-cfasync="false" src="../resources/js/config.js?v=3.7.0.797539453036" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../resources/js/config.js?v=3.7.0.797543019182" data-turbo-eval="false" defer></script>
     <script data-cfasync="false" src="../resources/js/retype.js?v=3.7.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="../resources/js/lunr.js?v=3.7.0.797539453036" data-turbo-eval="false" defer></script>
-    <script id="prism-js" data-cfasync="false" src="../resources/js/prism.js?v=3.7.0.797539453036" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../resources/js/lunr.js?v=3.7.0.797543019182" data-turbo-eval="false" defer></script>
+    <script id="prism-js" data-cfasync="false" src="../resources/js/prism.js?v=3.7.0.797543019182" defer></script>
 
     <style>
 
@@ -250,34 +250,38 @@
 <p>Provides methods to schedule and manage tasks. It supports both synchronous and asynchronous task execution with various timing options.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre class="language-lua"><code v-pre class="language-lua">--- Schedules a task to run on the next tick.
---  @param callback The task function to execute
-scheduler:run(callback: () -&gt; void): void
+--  @param handler The task function to execute
+scheduler:run(handler: () -&gt; void): BukkitTask
 
 --- Schedules an asynchronous task to run on the next tick.
---  @param callback The task function to execute
-scheduler:runAsync(callback: () -&gt; void): void
+--  @param handler The task function to execute
+scheduler:runAsync(handler: () -&gt; void): BukkitTask
 
 --- Schedules a task to run after a delay (in ticks).
---  @param callback The task function to execute
+--  @param handler The task function to execute
 --  @param delay Delay in ticks before execution
-scheduler:runDelayed(callback: (task: BukkitTask) -&gt; void, delay: number): BukkitTask
+scheduler:runLater(handler: () -&gt; void, delay: number): BukkitTask
 
 --- Schedules an asynchronous task to run after a delay (in ticks).
---  @param callback The task function to execute
+--  @param handler The task function to execute
 --  @param delay Delay in ticks before execution
-scheduler:runDelayedAsync(callback: (task: BukkitTask) -&gt; void, delay: number): BukkitTask
+scheduler:runLaterAsync(handler: () -&gt; void, delay: number): BukkitTask
 
 --- Schedules a repeating task.
---  @param callback The task function to execute
+--  @param handler The task function to execute
 --  @param delay Delay in ticks before first execution
 --  @param period Interval in ticks between executions
-scheduler:runRepeating(callback: (task: BukkitTask) -&gt; void, delay: number, period: number): BukkitTask
+scheduler:runRepeating(handler: () -&gt; void, delay: number, period: number): BukkitTask
 
 --- Schedules an asynchronous repeating task.
---  @param callback The task function to execute
+--  @param handler The task function to execute
 --  @param delay Delay in ticks before first execution
 --  @param period Interval in ticks between executions
-scheduler:runRepeatingAsync(callback: (task: BukkitTask) -&gt; void, delay: number, period: number): BukkitTask</code></pre>
+scheduler:runRepeatingAsync(handler: () -&gt; void, delay: number, period: number): BukkitTask
+
+--- Cancels a task with the specified identifier.
+--  @param task The task to cancel
+scheduler:cancel(task: number): void</code></pre>
 </doc-codeblock></div>
 </doc-panel>
 

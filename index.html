@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.7.0.797539453036">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.7.0.797543019182">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 3.7.0">
@@ -31,12 +31,12 @@
     <script data-cfasync="false">(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="assets/favicon.png" rel="icon">
-    <link href="resources/css/retype.css?v=3.7.0.797539453036" rel="stylesheet">
+    <link href="resources/css/retype.css?v=3.7.0.797543019182" rel="stylesheet">
 
-    <script data-cfasync="false" src="resources/js/config.js?v=3.7.0.797539453036" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="resources/js/config.js?v=3.7.0.797543019182" data-turbo-eval="false" defer></script>
     <script data-cfasync="false" src="resources/js/retype.js?v=3.7.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="resources/js/lunr.js?v=3.7.0.797539453036" data-turbo-eval="false" defer></script>
-    <script id="prism-js" data-cfasync="false" src="resources/js/prism.js?v=3.7.0.797539453036" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="resources/js/lunr.js?v=3.7.0.797543019182" data-turbo-eval="false" defer></script>
+    <script id="prism-js" data-cfasync="false" src="resources/js/prism.js?v=3.7.0.797543019182" defer></script>
 
     <style>
 
@@ -262,8 +262,8 @@
         <span>LuaLink v2</span>
     </h1>
 </doc-anchor-target>
-<p>LuaLink is an experimental plugin that provides a basic Lua scripting runtime for Paper-based Minecraft servers. It is designed for small and simple tasks and serves as an alternative to Skript and other scripting plugins.</p>
-<p>Scripting runtime is based on <a href="https://github.com/gudzpoz/luajava">LuaJava</a> with <a href="https://github.com/LuaJIT/LuaJIT">LuaJIT</a>. For more details on implementation specifics or differences, please refer to their respective documentation.</p>
+<p><strong>LuaLink</strong> is an experimental plugin that provides a basic Lua scripting runtime for <strong>Paper-based</strong> Minecraft servers. It is designed for small and simple tasks and serves as a much more powerful alternative to <strong>Skript</strong> and other scripting plugins.</p>
+<p>Scripting runtime is based on <strong><a href="https://github.com/gudzpoz/luajava">LuaJava</a></strong> with <strong><a href="https://github.com/LuaJIT/LuaJIT">LuaJIT</a></strong>. For more details on implementation specifics or differences, please refer to their respective documentation.</p>
 <br />
 <doc-anchor-target id="features">
     <h2>
@@ -305,28 +305,28 @@
 </doc-anchor-target>
 <p>After you have installed the plugin, you can start writing your first script.</p>
 <ul>
-<li>Each script is stored in a separate folder inside the <code v-pre>plugins/LuaLink/scripts</code> directory.</li>
-<li>Entry point of the script is a file named <code v-pre>main.lua</code> or <code v-pre>init.lua</code>.</li>
 <li>Script life-cycle can be managed using <code v-pre>/lualink load</code>, <code v-pre>/lualink unload</code> and <code v-pre>/lualink reload</code> commands.</li>
+<li>Each script is stored in a separate folder inside the <code v-pre>plugins/LuaLink/scripts</code> directory.</li>
+<li>Entry point of the script is a file named <code v-pre>main.lua</code>.</li>
 </ul>
 <div class="codeblock-wrapper"><doc-codeblock>
-<div class="codeblock-title">plugins/LuaLink/scripts/my_script/init.lua</div>
-<pre class="language-lua"><code v-pre class="language-lua">local Bukkit = import &quot;org.bukkit.Bukkit&quot;
+<div class="codeblock-title">plugins/LuaLink/scripts/my_script/main.lua</div>
+<pre class="language-lua"><code v-pre class="language-lua">local Bukkit = import(&quot;org.bukkit.Bukkit&quot;)
 
 -- Called after the script has been successfully loaded.
 script:onLoad(function()
     -- Logging message to the console.
-    script:logger:info(&quot;Hello, World!&quot;)
+    script.logger:info(&quot;Hello, World!&quot;)
 end)
 </code></pre>
 </doc-codeblock></div>
 <p>It&#x27;s quite simple, isn&#x27;t it? For this particular case, we can simplify it even further by extracting the logic away from the <code v-pre>onLoad</code> block.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
-<div class="codeblock-title">plugins/LuaLink/scripts/my_script/init.lua</div>
-<pre class="language-lua"><code v-pre class="language-lua">local Bukkit = import &quot;org.bukkit.Bukkit&quot;
+<div class="codeblock-title">plugins/LuaLink/scripts/my_script/main.lua</div>
+<pre class="language-lua"><code v-pre class="language-lua">local Bukkit = import(&quot;org.bukkit.Bukkit&quot;)
 
 -- Logging message to the console.
-script:logger:info(&quot;Hello, World!&quot;)</code></pre>
+script.logger:info(&quot;Hello, World!&quot;)</code></pre>
 </doc-codeblock></div>
 <p>Want to do something more complex? More information on how to write scripts can be found on the <strong><a href="getting-started/">Getting Started</a></strong> page.</p>
 
