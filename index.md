@@ -8,9 +8,9 @@ This documentation page is still a work in progress and may contain outdated inf
 !!!
 
 # LuaLink v2
-LuaLink is an experimental plugin that provides a basic Lua scripting runtime for Paper-based Minecraft servers. It is designed for small and simple tasks and serves as an alternative to Skript and other scripting plugins. 
+**LuaLink** is an experimental plugin that provides a basic Lua scripting runtime for **Paper-based** Minecraft servers. It is designed for small and simple tasks and serves as a much more powerful alternative to **Skript** and other scripting plugins. 
 
-Scripting runtime is based on [LuaJava](https://github.com/gudzpoz/luajava) with [LuaJIT](https://github.com/LuaJIT/LuaJIT). For more details on implementation specifics or differences, please refer to their respective documentation.  
+Scripting runtime is based on **[LuaJava](https://github.com/gudzpoz/luajava)** with **[LuaJIT](https://github.com/LuaJIT/LuaJIT)**. For more details on implementation specifics or differences, please refer to their respective documentation.  
 
 <br />
 
@@ -41,26 +41,26 @@ Plugin can be downloaded from following sources:
 ## Quick Start
 After you have installed the plugin, you can start writing your first script.
 
-- Each script is stored in a separate folder inside the `plugins/LuaLink/scripts` directory. 
-- Entry point of the script is a file named `main.lua` or `init.lua`.
 - Script life-cycle can be managed using `/lualink load`, `/lualink unload` and `/lualink reload` commands.
+- Each script is stored in a separate folder inside the `plugins/LuaLink/scripts` directory.
+- Entry point of the script is a file named `main.lua`.
 
-```lua plugins/LuaLink/scripts/my_script/init.lua
-local Bukkit = import "org.bukkit.Bukkit"
+```lua plugins/LuaLink/scripts/my_script/main.lua
+local Bukkit = import("org.bukkit.Bukkit")
 
 -- Called after the script has been successfully loaded.
 script:onLoad(function()
     -- Logging message to the console.
-    script:logger:info("Hello, World!")
+    script.logger:info("Hello, World!")
 end)
 
 ```
 It's quite simple, isn't it? For this particular case, we can simplify it even further by extracting the logic away from the `onLoad` block.
 
-```lua plugins/LuaLink/scripts/my_script/init.lua
-local Bukkit = import "org.bukkit.Bukkit"
+```lua plugins/LuaLink/scripts/my_script/main.lua
+local Bukkit = import("org.bukkit.Bukkit")
 
 -- Logging message to the console.
-script:logger:info("Hello, World!")
+script.logger:info("Hello, World!")
 ```
 Want to do something more complex? More information on how to write scripts can be found on the **[Getting Started](getting-started.md)** page.

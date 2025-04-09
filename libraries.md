@@ -1,6 +1,6 @@
 ---
 icon: package-dependents
-order: 97
+order: 96
 ---
 
 # Libraries
@@ -9,10 +9,10 @@ LuaLink provides a way to load external **Java** libraries for use in your scrip
 <br />
 
 ## Lua Libraries
-External Lua libraries can be added by copying files to the `/plugins/LuaLink/libs/` folder.
+External Lua libraries can be added by creating or copying files to the `/plugins/LuaLink/libs/` folder.
 
 ==- Example Lua Library
-```lua **/plugins/LuaLink/libs/example_library/init.lua**
+```lua **/plugins/LuaLink/libs/example_library/main.lua**
 local Counter = {}
 Counter.__index = Counter
 
@@ -46,18 +46,18 @@ This is an example of a Counter class that allows you to increment, decrement, a
 
 Now, if you want to use this class in your script, you can import it using the `require` keyword.
 
-```lua /plugins/LuaLink/scripts/example_script/init.lua
+```lua /plugins/LuaLink/scripts/example_script/main.lua
 local Counter = require("example_library")
 
 script:onLoad(function()
     -- Creating a new instance of the Counter class.
-    local counter = Counter.new()
+    local counter = Counter()
     -- Incrementing the counter three times.
     counter:increment()
     counter:increment()
     counter:increment()
     -- Printing current value of the counter to the console.
-    script.logger.info(counter:get() .. " is the current value of the counter.")
+    script.logger:info(counter:get() .. " is the current value of the counter.")
 end)
 ```
 
@@ -88,7 +88,7 @@ External Java/Kotlin libraries can be added by configuring the `/plugins/LuaLink
 }
 ```
 
-In this example, we are adding stefvanschie's [IF](https://github.com/stefvanschie/IF) library of version `0.10.11` from [Maven Central](https://repo.maven.apache.org/maven2/) repository. You can also see how to add and authenticate with a private repository using credentials, which might be essential when working with closed-source projects or [GitHub Packages](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-apache-maven-registry).
+In this example, we are adding stefvanschie's [IF](https://github.com/stefvanschie/IF) library of version `0.10.11` from [Maven Central](https://repo.maven.apache.org/maven2/) repository. You can also see how and authenticate with a private repository using credentials, which might be essential when working with closed-source projects or [GitHub Packages](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-apache-maven-registry).
 
 After restarting the server, we should be able to import and access any class that belongs to specified library(-ies).
 

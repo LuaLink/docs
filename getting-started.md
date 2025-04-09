@@ -21,7 +21,7 @@ Basic **Lua** knowledge is an obvious prerequisite, but it should be relatively 
 | ------------------------------------------------------------ |
 | [1. Creating Scripts](#creating-scripts)                     |
 | [2. Script Life-cycle](#script-life-cycle)                   |
-| [3. Importing](#importing)                                   |
+| [3. Importing and Requiring](#importing-and-requiring)       |
 | [4. Constructors and Instances](#constructors-and-instances) |
 | [5. Commands](#commands)                                     |
 | [6. Events](#events)                                         |
@@ -31,12 +31,12 @@ Basic **Lua** knowledge is an obvious prerequisite, but it should be relatively 
 
 ### Creating Scripts
 There are a couple of things to keep in mind when using LuaLink.
-- Each script is stored in a separate folder inside the `plugins/LuaLink/scripts` directory, and libraries are stored in the `plugins/LuaLink/libs` directory.  
-  <sup>More about libraries can be found on the **[Libraries](libraries.md)** page.</sup>
-- Entry point of the script (or library) is a file named `main.lua` or `init.lua`.  
-  <sup>It doesn't matter which file you choose as the entry point, but you should be consistent with your naming convention.</sup>
 - Script life-cycle can be managed using `/lualink load`, `/lualink unload` and `/lualink reload` commands.  
   <sup>More on this can be found on the **[Commands](commands.md)** page.</sup>
+- Each script is stored in a separate folder inside the `plugins/LuaLink/scripts` directory, and libraries are stored in the `plugins/LuaLink/libs` directory.  
+  <sup>More about libraries can be found on the **[Libraries](libraries.md)** page.</sup>
+- Entry point of the script (or library) is a file named `main.lua`.  
+  <sup>More files can be created and loaded using the `require` keyword.</sup>
 
 <br />
 
@@ -45,12 +45,12 @@ Scripts are automatically loaded after server has been fully started. They can a
 ```lua
 -- Called after the script has been successfully loaded.
 script:onLoad(function()
-    script:logger:info("Script has been loaded.")
+    script.logger:info("Script has been loaded.")
 end)
 
 -- Called before the script is attempted to be unloaded.
 script:onUnload(function()
-    script:logger:info("Script is about to be unloaded.")
+    script.logger:info("Script is about to be unloaded.")
 end)
 ```
 
@@ -81,7 +81,8 @@ script:onLoad(function()
     counter:increment()
     counter:increment()
     -- Printing current value of the counter to the console.
-    script.logger.info(counter:get() ..
+    script.logger:info(counter:get() .. " is the current value of the counter.")
+end)
 ```
 
 <br />
@@ -89,9 +90,9 @@ script:onLoad(function()
 ### Constructors and Instances
 New instances of Java classes can be created as follows.
 ```lua
-local Bukkit = import "org.bukkit.Bukkit"
-local Keyed = import "net.kyori.adventure.key.Keyed"
-local NamespacedKey = import "org.bukkit.NamespacedKey"
+local Bukkit = import("org.bukkit.Bukkit")
+local Keyed = import("net.kyori.adventure.key.Keyed")
+local NamespacedKey = import("org.bukkit.NamespacedKey")
 
 script.onLoad(function()
     -- Creating new instance of NamespacedKey class.
@@ -101,7 +102,7 @@ script.onLoad(function()
     -- Checking if World is instance of Keyed. (SPOILER: IT IS)
     if (Keyed.class:isInstance(world) == true) then 
         -- Sending loaded chunks count to the console.
-        script.logger.info("World " .. world:key():asString() .. " has " .. world:getChunkCount() .. " chunks loaded.")
+        script.logger:info("World " .. world:key():asString() .. " has " .. world:getChunkCount() .. " chunks loaded.")
     end
 end)
 ```
@@ -111,7 +112,7 @@ end)
 ### Commands
 Non-complex commands can be created with little effort using built-in API.
 ```lua
-local Bukkit = import "org.bukkit.Bukkit"
+local Bukkit = import("org.bukkit.Bukkit")
 
 -- Function to handle command tab-completion.
 function onTabComplete(sender, alias, args)
@@ -157,18 +158,18 @@ end)
 ### Scheduler
 Scheduler can be used to register single-use, delayed or repeating tasks.
 ```lua
--- Schedules task to be run on the next tick.
-script.run(function()
+-- Schedules a task to be run on the next tick.
+scheduler:run(function()
     -- Whatever belongs to the task goes here.
 end)
 
--- Schedules task to be run after 20 ticks has passed. Task function parameter can be omitted if not used. 
-script.runDelayed(function(task)
+-- Schedules a task to be run after 20 ticks has passed. 
+scheduler:runLater(function()
     -- Whatever belongs to the task goes here.
 end, 20)
 
--- Schedules task to be run after 20 ticks has passed, and repeated every 160 ticks. Task function parameter can be omitted if not used. 
-script.runRepeating(function(task)
+-- Schedules a task to be run after 20 ticks has passed, and repeated every 160 ticks.
+scheduler:runRepeating(function()
     -- Whatever belongs to the task goes here.
 end, 20, 160)
 ```
@@ -176,9 +177,9 @@ end, 20, 160)
 Tasks can also be run asynchronously, but please note that neither the Bukkit API nor the LuaLink API is guaranteed to be thread-safe.
 ```lua
 -- Schedules asynchronous task to be run on the next tick.
-script.runAsync(callback: () -> void): void
--- Schedules asynchronous task to be run after {delay} ticks has passed. Task function parameter can be omitted if not used. 
-script.runDelayedAsync(callback: (task: BukkitTask) -> void, delay: number): BukkitTask
--- Schedules task to be run after {delay} ticks has passed, and repeated every {period} ticks. Task function parameter can be omitted if not used. 
-script.runRepeatingAsync(callback: (task: BukkitTask) -> void, delay: number, period: number): BukkitTask
+scheduler:runAsync(handler: () -> void): BukkitTask
+-- Schedules asynchronous task to be run after {delay} ticks has passed.
+scheduler:runLaterAsync(handler: () -> void, delay: number): BukkitTask
+-- Schedules task to be run after {delay} ticks has passed, and repeated every {period} ticks.
+scheduler:runRepeatingAsync(handler: () -> void, delay: number, period: number): BukkitTask
 ```
