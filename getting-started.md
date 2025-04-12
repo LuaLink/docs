@@ -31,12 +31,12 @@ Basic **Lua** knowledge is an obvious prerequisite, but it should be relatively 
 
 ### Creating Scripts
 There are a couple of things to keep in mind when using LuaLink.
-- Script life-cycle can be managed using `/lualink load`, `/lualink unload` and `/lualink reload` commands.  
-  <sup>More on this can be found on the **[Commands](commands.md)** page.</sup>
-- Each script is stored in a separate folder inside the `plugins/LuaLink/scripts` directory, and libraries are stored in the `plugins/LuaLink/libs` directory.  
-  <sup>More about libraries can be found on the **[Libraries](libraries.md)** page.</sup>
-- Entry point of the script (or library) is a file named `main.lua`.  
-  <sup>More files can be created and loaded using the `require` keyword.</sup>
+- Each script is stored in a separate folder inside the `plugins/LuaLink/scripts` directory.  
+  <sup>For example `/plugins/LuaLink/scripts/example/main.lua` will be loaded as `example` script.</sup>
+- Script life-cycle can be managed using `/lualink` command.  
+  <sup>Full command reference is available on the **[Commands](commands.md)** page.</sup>
+- Entry point of the script is a file named `main.lua`.  
+  <sup>More files can be imported using the `require` keyword.</sup>
 
 <br />
 
@@ -132,7 +132,7 @@ end, {
     aliases = {"e", "print"},
     permission = "scripts.command.echo",
     description = "Prints specified message to the sender.",
-    usage = "/echo [player]",
+    usage = "/echo [message]",
     tabComplete = onTabComplete
 })
 ```
@@ -143,7 +143,7 @@ end, {
 Bukkit events can be hooked into relatively easily.
 ```lua
 -- Called when player joins the server.
-script:registerEvent("org.bukkit.event.player.PlayerJoinEvent", function(event)
+script:registerListener("org.bukkit.event.player.PlayerJoinEvent", function(event)
     -- Getting player associated with the event. 
     local player = event:getPlayer()
     -- Playing firework sound to the player.
@@ -159,17 +159,17 @@ end)
 Scheduler can be used to register single-use, delayed or repeating tasks.
 ```lua
 -- Schedules a task to be run on the next tick.
-scheduler:run(function()
+scheduler:run(function(runnable)
     -- Whatever belongs to the task goes here.
 end)
 
 -- Schedules a task to be run after 20 ticks has passed. 
-scheduler:runLater(function()
+scheduler:runDelayed(function(runnable)
     -- Whatever belongs to the task goes here.
 end, 20)
 
 -- Schedules a task to be run after 20 ticks has passed, and repeated every 160 ticks.
-scheduler:runRepeating(function()
+scheduler:runRepeating(function(runnable)
     -- Whatever belongs to the task goes here.
 end, 20, 160)
 ```
@@ -177,9 +177,9 @@ end, 20, 160)
 Tasks can also be run asynchronously, but please note that neither the Bukkit API nor the LuaLink API is guaranteed to be thread-safe.
 ```lua
 -- Schedules asynchronous task to be run on the next tick.
-scheduler:runAsync(handler: () -> void): BukkitTask
+scheduler:runAsync(handler: (BukkitRunnable) -> void): BukkitTask
 -- Schedules asynchronous task to be run after {delay} ticks has passed.
-scheduler:runLaterAsync(handler: () -> void, delay: number): BukkitTask
+scheduler:runDelayedAsync(handler: (BukkitRunnable) -> void, delay: number): BukkitTask
 -- Schedules task to be run after {delay} ticks has passed, and repeated every {period} ticks.
-scheduler:runRepeatingAsync(handler: () -> void, delay: number, period: number): BukkitTask
+scheduler:runRepeatingAsync(handler: (BukkitRunnable) -> void, delay: number, period: number): BukkitTask
 ```
