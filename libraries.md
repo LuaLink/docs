@@ -88,7 +88,7 @@ External Java/Kotlin libraries can be added by configuring the `/plugins/LuaLink
 }
 ```
 
-In this example, we are adding **[PaperLib](https://github.com/PaperMC/PaperLub)** library of version **1.0.7** from **[PaperMC](https://repo.papermc.io/repository/maven-public/)** repository. You can also see how and authenticate with a private repository using credentials, which might be essential when working with closed-source projects or **[GitHub Packages](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-apache-maven-registry)**.
+In this example, we are adding **[PaperLib](https://github.com/PaperMC/PaperLib)** library of version **1.0.7** from **[PaperMC](https://repo.papermc.io/repository/maven-public/)** repository. You can also see how and authenticate with a private repository using credentials, which might be essential when working with closed-source projects or **[GitHub Packages](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-apache-maven-registry)**.
 
 After restarting the server, we should be able to import and access any class that belongs to specified library(-ies).
 
