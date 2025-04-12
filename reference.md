@@ -60,7 +60,9 @@ scheduler:runRepeating(handler: (BukkitRunnable) -> void, delay: number, period:
 --  @param period Interval in ticks between executions
 scheduler:runRepeatingAsync(handler: (BukkitRunnable) -> void, delay: number, period: number): BukkitTask
 
---- Cancels a task with the specified identifier.
+--- Cancels the provided task.
+--  @param taskId The id of the tas to cancel
+--  @param runnable The runnable instance of the task to cancel
 --  @param task The task to cancel
-scheduler:cancel(task: number | runnable: BukkitRunnable | task: BukkitTask): void
+scheduler:cancel(taskId: number | runnable: BukkitRunnable | task: BukkitTask): void
 ```
