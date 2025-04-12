@@ -27,8 +27,12 @@ Libraries and utilities exposed to the script environment.
   - :icon-code: [`select`](https://devdocs.io/lua/index#pdf-select)
   - :icon-code: [`tonumber`](https://devdocs.io/lua/index#pdf-tonumber)
   - :icon-code: [`tostring`](https://devdocs.io/lua/index#pdf-tostring)
-  - :icon-code: [`unpack`](https://devdocs.io/lua/index#pdf-unpack)
   - :icon-code: [`require`](https://devdocs.io/lua/index#pdf-require)
+  - :icon-code: [`unpack`](https://devdocs.io/lua/index#pdf-table.unpack)
+- **Global Variables**
+  - :icon-italic: `script`
+  - :icon-italic: `server`
+  - :icon-italic: `scheduler`
 ==-
 
 === Script
@@ -36,9 +40,6 @@ Main script class available in the global scope of each script. Provides access 
 ```lua Variables
 --- Returns the name of the script.
 script.name: string
-
--- Returns the server instance.
-script.server: Server
 
 --- Returns the script's Logger instance.
 script.logger: Logger
