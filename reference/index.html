@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.7.0.797543019182">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.7.0.797801949918">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 3.7.0">
@@ -11,7 +11,7 @@
     <!-- Primary Meta Tags -->
     <title>Reference</title>
     <meta name="title" content="Reference">
-    <meta name="description" content="Provides methods to schedule and manage tasks. It supports both synchronous and asynchronous task execution with various timing options.">
+    <meta name="description" content="Main script class available in the global scope of each script. Provides access to various utilities.">
 
     <!-- Canonical -->
     <link rel="canonical" href="/reference/">
@@ -20,23 +20,23 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="/reference/">
     <meta property="og:title" content="Reference">
-    <meta property="og:description" content="Provides methods to schedule and manage tasks. It supports both synchronous and asynchronous task execution with various timing options.">
+    <meta property="og:description" content="Main script class available in the global scope of each script. Provides access to various utilities.">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="/reference/">
     <meta property="twitter:title" content="Reference">
-    <meta property="twitter:description" content="Provides methods to schedule and manage tasks. It supports both synchronous and asynchronous task execution with various timing options.">
+    <meta property="twitter:description" content="Main script class available in the global scope of each script. Provides access to various utilities.">
 
     <script data-cfasync="false">(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../assets/favicon.png" rel="icon">
-    <link href="../resources/css/retype.css?v=3.7.0.797543019182" rel="stylesheet">
+    <link href="../resources/css/retype.css?v=3.7.0.797801949918" rel="stylesheet">
 
-    <script data-cfasync="false" src="../resources/js/config.js?v=3.7.0.797543019182" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../resources/js/config.js?v=3.7.0.797801949918" data-turbo-eval="false" defer></script>
     <script data-cfasync="false" src="../resources/js/retype.js?v=3.7.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="../resources/js/lunr.js?v=3.7.0.797543019182" data-turbo-eval="false" defer></script>
-    <script id="prism-js" data-cfasync="false" src="../resources/js/prism.js?v=3.7.0.797543019182" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../resources/js/lunr.js?v=3.7.0.797801949918" data-turbo-eval="false" defer></script>
+    <script id="prism-js" data-cfasync="false" src="../resources/js/prism.js?v=3.7.0.797801949918" defer></script>
 
     <style>
 
@@ -245,45 +245,71 @@
         <span>Reference</span>
     </h1>
 </doc-anchor-target>
-<doc-panel id="scheduler">
-    <template #title>Scheduler</template>
+<doc-panels>
+   <doc-panel id="script">
+       <template #title>Script</template>
+<p>Main script class available in the global scope of each script. Provides access to various utilities.</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<div class="codeblock-title">Variables</div>
+<pre class="language-lua"><code v-pre class="language-lua">--- Returns the name of the script.
+script.name: string
+
+--- Returns the script's Logger instance.
+script.logger: Logger</code></pre>
+</doc-codeblock></div>
+<div class="codeblock-wrapper"><doc-codeblock>
+<div class="codeblock-title">Functions</div>
+<pre class="language-lua"><code v-pre class="language-lua">--- Registers a server command that players and console can execute.
+--  @param handler The command handler function
+--  @param metadata The command metadata table
+script:registerCommand(handler: (sender: CommandSender, args: table) -&gt; void, metadata: table): void
+
+--- Registers an event listener.
+--  @param event The event class
+--  @param handler The event handler function
+script:registerListener(event: string, handler: (event: Event) -&gt; void): void</code></pre>
+</doc-codeblock></div>
+   </doc-panel>
+   <doc-panel id="scheduler">
+       <template #title>Scheduler</template>
 <p>Provides methods to schedule and manage tasks. It supports both synchronous and asynchronous task execution with various timing options.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
+<div class="codeblock-title">Functions</div>
 <pre class="language-lua"><code v-pre class="language-lua">--- Schedules a task to run on the next tick.
 --  @param handler The task function to execute
-scheduler:run(handler: () -&gt; void): BukkitTask
+scheduler:run(handler: (BukkitRunnable) -&gt; void): BukkitTask
 
 --- Schedules an asynchronous task to run on the next tick.
 --  @param handler The task function to execute
-scheduler:runAsync(handler: () -&gt; void): BukkitTask
+scheduler:runAsync(handler: (BukkitRunnable) -&gt; void): BukkitTask
 
 --- Schedules a task to run after a delay (in ticks).
 --  @param handler The task function to execute
 --  @param delay Delay in ticks before execution
-scheduler:runLater(handler: () -&gt; void, delay: number): BukkitTask
+scheduler:runDelayed(handler: (BukkitRunnable) -&gt; void, delay: number): BukkitTask
 
 --- Schedules an asynchronous task to run after a delay (in ticks).
 --  @param handler The task function to execute
 --  @param delay Delay in ticks before execution
-scheduler:runLaterAsync(handler: () -&gt; void, delay: number): BukkitTask
+scheduler:runDelayedAsync(handler: (BukkitRunnable) -&gt; void, delay: number): BukkitTask
 
 --- Schedules a repeating task.
 --  @param handler The task function to execute
 --  @param delay Delay in ticks before first execution
 --  @param period Interval in ticks between executions
-scheduler:runRepeating(handler: () -&gt; void, delay: number, period: number): BukkitTask
+scheduler:runRepeating(handler: (BukkitRunnable) -&gt; void, delay: number, period: number): BukkitTask
 
 --- Schedules an asynchronous repeating task.
 --  @param handler The task function to execute
 --  @param delay Delay in ticks before first execution
 --  @param period Interval in ticks between executions
-scheduler:runRepeatingAsync(handler: () -&gt; void, delay: number, period: number): BukkitTask
+scheduler:runRepeatingAsync(handler: (BukkitRunnable) -&gt; void, delay: number, period: number): BukkitTask
 
 --- Cancels a task with the specified identifier.
 --  @param task The task to cancel
-scheduler:cancel(task: number): void</code></pre>
+scheduler:cancel(task: number | runnable: BukkitRunnable | task: BukkitTask): void</code></pre>
 </doc-codeblock></div>
-</doc-panel>
+   </doc-panel>
 
                                 
                                 <!-- Required only on API pages -->

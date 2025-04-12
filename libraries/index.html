@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.7.0.797543019182">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.7.0.797801949918">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 3.7.0">
@@ -11,7 +11,7 @@
     <!-- Primary Meta Tags -->
     <title>Libraries</title>
     <meta name="title" content="Libraries">
-    <meta name="description" content="LuaLink provides a way to load external Java libraries for use in your scripts, as well as to define and/or use external ">
+    <meta name="description" content="LuaLink provides a way to load external Java libraries for use in your scripts, as well as to define and use external ">
 
     <!-- Canonical -->
     <link rel="canonical" href="/libraries/">
@@ -20,23 +20,23 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="/libraries/">
     <meta property="og:title" content="Libraries">
-    <meta property="og:description" content="LuaLink provides a way to load external Java libraries for use in your scripts, as well as to define and/or use external ">
+    <meta property="og:description" content="LuaLink provides a way to load external Java libraries for use in your scripts, as well as to define and use external ">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="/libraries/">
     <meta property="twitter:title" content="Libraries">
-    <meta property="twitter:description" content="LuaLink provides a way to load external Java libraries for use in your scripts, as well as to define and/or use external ">
+    <meta property="twitter:description" content="LuaLink provides a way to load external Java libraries for use in your scripts, as well as to define and use external ">
 
     <script data-cfasync="false">(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../assets/favicon.png" rel="icon">
-    <link href="../resources/css/retype.css?v=3.7.0.797543019182" rel="stylesheet">
+    <link href="../resources/css/retype.css?v=3.7.0.797801949918" rel="stylesheet">
 
-    <script data-cfasync="false" src="../resources/js/config.js?v=3.7.0.797543019182" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../resources/js/config.js?v=3.7.0.797801949918" data-turbo-eval="false" defer></script>
     <script data-cfasync="false" src="../resources/js/retype.js?v=3.7.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="../resources/js/lunr.js?v=3.7.0.797543019182" data-turbo-eval="false" defer></script>
-    <script id="prism-js" data-cfasync="false" src="../resources/js/prism.js?v=3.7.0.797543019182" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../resources/js/lunr.js?v=3.7.0.797801949918" data-turbo-eval="false" defer></script>
+    <script id="prism-js" data-cfasync="false" src="../resources/js/prism.js?v=3.7.0.797801949918" defer></script>
 
     <style>
 
@@ -245,25 +245,19 @@
         <span>Libraries</span>
     </h1>
 </doc-anchor-target>
-<p>LuaLink provides a way to load external <strong>Java</strong> libraries for use in your scripts, as well as to define and/or use external <strong>Lua</strong> libraries.</p>
+<p>LuaLink provides a way to load external <strong>Java</strong> libraries for use in your scripts, as well as to define and use external <strong>Lua</strong> libraries.</p>
 <br />
-<doc-anchor-target id="lua-libraries">
-    <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#lua-libraries">#</doc-anchor-trigger>
-        <span>Lua Libraries</span>
-    </h2>
-</doc-anchor-target>
-<p>External Lua libraries can be added by creating or copying files to the <code v-pre>/plugins/LuaLink/libs/</code> folder.</p>
-<doc-panel id="example-lua-library" collapsed>
-    <template #title>Example Lua Library</template>
-<div class="codeblock-wrapper"><doc-codeblock>
-<div class="codeblock-title"><strong>/plugins/LuaLink/libs/example_library/main.lua</strong></div>
-<pre class="language-lua"><code v-pre class="language-lua">local Counter = {}
-Counter.__index = Counter
+<!--
+## Lua Libraries
+External Lua libraries can be added by creating or copying files to the `/plugins/LuaLink/libs/` folder.
+
+==- Example Lua Library
+```lua **/plugins/LuaLink/libs/example_library/main.lua**
+Counter = {}
 
 -- Creates a new Counter instance.
 function Counter.new()
-    local self = setmetatable({}, Counter)
+    local self = setmetatable({}, {__index = Counter})
     self.count = 0
     return self
 end
@@ -282,28 +276,31 @@ end
 function Counter:get()
     return self.count
 end
+```
+==-
 
-return Counter</code></pre>
-</doc-codeblock></div>
-</doc-panel>
-<p>This is an example of a Counter class that allows you to increment, decrement, and get the current value of a counter.</p>
-<p>Now, if you want to use this class in your script, you can import it using the <code v-pre>require</code> keyword.</p>
-<div class="codeblock-wrapper"><doc-codeblock>
-<div class="codeblock-title">/plugins/LuaLink/scripts/example_script/main.lua</div>
-<pre class="language-lua"><code v-pre class="language-lua">local Counter = require(&quot;example_library&quot;)
+This is an example of a Counter class that allows you to increment, decrement, and get the current value of a counter.
+
+Now, if you want to use this class in your script, you can import it using the `require` keyword.
+
+```lua /plugins/LuaLink/scripts/example_script/main.lua
+local Counter = require("example_library")
 
 script:onLoad(function()
     -- Creating a new instance of the Counter class.
-    local counter = Counter()
+    local counter = Counter:new()
     -- Incrementing the counter three times.
     counter:increment()
     counter:increment()
     counter:increment()
     -- Printing current value of the counter to the console.
-    script.logger:info(counter:get() .. &quot; is the current value of the counter.&quot;)
-end)</code></pre>
-</doc-codeblock></div>
+    script.logger:info(counter:get() .. " is the current value of the counter.")
+end)
+```
+
 <br />
+
+-->
 <doc-anchor-target id="java-libraries">
     <h2>
         <doc-anchor-trigger class="header-anchor-trigger" to="#java-libraries">#</doc-anchor-trigger>
@@ -323,7 +320,7 @@ end)</code></pre>
     // Repositories to be used for dependency resolution.
     &quot;repositories&quot;: {
         // Repository definition using simple format.
-        &quot;MavenCentral&quot;: &quot;https://repo.maven.apache.org/maven2/&quot;,
+        &quot;PaperMC&quot;: &quot;https://repo.papermc.io/repository/maven-public/&quot;,
         // Repository definition with credentials authentication.
         &quot;SomePrivateRepository&quot;: {
             &quot;url&quot;: &quot;https://repo.example.com/private&quot;,
@@ -334,17 +331,23 @@ end)</code></pre>
     // Dependencies to be downloaded and exposed to the scripting runtime.
     // Entries must be specified using Maven coordinate format: groupId:artifactId:version
     &quot;dependencies&quot;: [
-        &quot;com.github.stefvanschie.inventoryframework:IF:0.10.11&quot;
+        &quot;io.papermc:paperlib:1.0.7&quot;
     ]
 }</code></pre>
 </doc-codeblock></div>
-<p>In this example, we are adding stefvanschie&#x27;s <a href="https://github.com/stefvanschie/IF">IF</a> library of version <code v-pre>0.10.11</code> from <a href="https://repo.maven.apache.org/maven2/">Maven Central</a> repository. You can also see how and authenticate with a private repository using credentials, which might be essential when working with closed-source projects or <a href="https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-apache-maven-registry">GitHub Packages</a>.</p>
+<p>In this example, we are adding <strong><a href="https://github.com/PaperMC/PaperLub">PaperLib</a></strong> library of version <strong>1.0.7</strong> from <strong><a href="https://repo.papermc.io/repository/maven-public/">PaperMC</a></strong> repository. You can also see how and authenticate with a private repository using credentials, which might be essential when working with closed-source projects or <strong><a href="https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-apache-maven-registry">GitHub Packages</a></strong>.</p>
 <p>After restarting the server, we should be able to import and access any class that belongs to specified library(-ies).</p>
 <div class="codeblock-wrapper"><doc-codeblock>
-<div class="codeblock-title">/plugins/LuaLink/scripts/example_script/init.lua</div>
-<pre class="language-lua"><code v-pre class="language-lua">-- TO-DO</code></pre>
+<div class="codeblock-title">/plugins/LuaLink/scripts/example_script/main.lua</div>
+<pre class="language-lua"><code v-pre class="language-lua">local PaperLib = import(&quot;io.papermc.lib.PaperLib&quot;)
+
+script.logger:info(&quot;Is the server running Paper? &quot; .. (PaperLib:isPaper() and &quot;YES&quot; or &quot;NO&quot;) .. &quot;!&quot;)</code></pre>
 </doc-codeblock></div>
-<br />
+<div class="codeblock-wrapper"><doc-codeblock>
+<div class="codeblock-title">Console Output</div>
+<pre class="language-log"><code v-pre class="language-log">[00:00:00 INFO]: [LuaLink/example_script] Is the server running Paper? YES!</code></pre>
+</doc-codeblock></div>
+<p>While this example may not be the best use of <strong>PaperLib</strong> - especially because <strong>LuaLink</strong> requires you to run the plugin on <strong>Paper</strong> - it is still a good example of how to use external libraries in your scripts.</p>
 
                                 
                                 <!-- Required only on API pages -->
