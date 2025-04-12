@@ -17,8 +17,8 @@ Scripting runtime is based on **[LuaJava](https://github.com/gudzpoz/luajava)** 
 ## Features
 {.list-icon}
 - :icon-code-square: Quick and easy scripting with Lua syntax. 
-- :icon-package: Full access to Bukkit API, built-in libraries and ~~loaded plugins~~. (work in progress)
-- :icon-package-dependents: Create your own or load external Java and Lua libraries.
+- :icon-package: Full access to Bukkit API, built-in libraries and loaded plugins. 
+- :icon-package-dependents: Create your own or load external Java ~~and Lua~~ (work in progress) libraries. 
 - :icon-sync: Loading and unloading of Lua scripts at runtime.
 - :icon-gear: Built-in utilities to simplify common tasks.
 
@@ -46,21 +46,17 @@ After you have installed the plugin, you can start writing your first script.
 - Entry point of the script is a file named `main.lua`.
 
 ```lua plugins/LuaLink/scripts/my_script/main.lua
-local Bukkit = import("org.bukkit.Bukkit")
-
 -- Called after the script has been successfully loaded.
 script:onLoad(function()
     -- Logging message to the console.
-    script.logger:info("Hello, World!")
+    print("Hello, World!")
 end)
 
 ```
 It's quite simple, isn't it? For this particular case, we can simplify it even further by extracting the logic away from the `onLoad` block.
 
 ```lua plugins/LuaLink/scripts/my_script/main.lua
-local Bukkit = import("org.bukkit.Bukkit")
-
 -- Logging message to the console.
-script.logger:info("Hello, World!")
+print("Hello, World!")
 ```
 Want to do something more complex? More information on how to write scripts can be found on the **[Getting Started](getting-started.md)** page.
