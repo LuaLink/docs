@@ -4,21 +4,21 @@ order: 96
 ---
 
 # Libraries
-LuaLink provides a way to load external **Java** libraries for use in your scripts, as well as to define and/or use external **Lua** libraries.
+LuaLink provides a way to load external **Java** libraries for use in your scripts, as well as to define and use external **Lua** libraries.
 
 <br />
 
+<!--
 ## Lua Libraries
 External Lua libraries can be added by creating or copying files to the `/plugins/LuaLink/libs/` folder.
 
 ==- Example Lua Library
 ```lua **/plugins/LuaLink/libs/example_library/main.lua**
-local Counter = {}
-Counter.__index = Counter
+Counter = {}
 
 -- Creates a new Counter instance.
 function Counter.new()
-    local self = setmetatable({}, Counter)
+    local self = setmetatable({}, {__index = Counter})
     self.count = 0
     return self
 end
@@ -37,8 +37,6 @@ end
 function Counter:get()
     return self.count
 end
-
-return Counter
 ```
 ==-
 
@@ -51,7 +49,7 @@ local Counter = require("example_library")
 
 script:onLoad(function()
     -- Creating a new instance of the Counter class.
-    local counter = Counter()
+    local counter = Counter:new()
     -- Incrementing the counter three times.
     counter:increment()
     counter:increment()
@@ -63,6 +61,8 @@ end)
 
 <br />
 
+-->
+
 ## Java Libraries
 External Java/Kotlin libraries can be added by configuring the `/plugins/LuaLink/libraries.json` file. Dependencies will be downloaded and exposed to the scripting runtime after server restart.
 
@@ -72,7 +72,7 @@ External Java/Kotlin libraries can be added by configuring the `/plugins/LuaLink
     // Repositories to be used for dependency resolution.
     "repositories": {
         // Repository definition using simple format.
-        "MavenCentral": "https://repo.maven.apache.org/maven2/",
+        "PaperMC": "https://repo.papermc.io/repository/maven-public/",
         // Repository definition with credentials authentication.
         "SomePrivateRepository": {
             "url": "https://repo.example.com/private",
@@ -83,17 +83,21 @@ External Java/Kotlin libraries can be added by configuring the `/plugins/LuaLink
     // Dependencies to be downloaded and exposed to the scripting runtime.
     // Entries must be specified using Maven coordinate format: groupId:artifactId:version
     "dependencies": [
-        "com.github.stefvanschie.inventoryframework:IF:0.10.11"
+        "io.papermc:paperlib:1.0.7"
     ]
 }
 ```
 
-In this example, we are adding stefvanschie's [IF](https://github.com/stefvanschie/IF) library of version `0.10.11` from [Maven Central](https://repo.maven.apache.org/maven2/) repository. You can also see how and authenticate with a private repository using credentials, which might be essential when working with closed-source projects or [GitHub Packages](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-apache-maven-registry).
+In this example, we are adding **[PaperLib](https://github.com/PaperMC/PaperLub)** library of version **1.0.7** from **[PaperMC](https://repo.papermc.io/repository/maven-public/)** repository. You can also see how and authenticate with a private repository using credentials, which might be essential when working with closed-source projects or **[GitHub Packages](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-apache-maven-registry)**.
 
 After restarting the server, we should be able to import and access any class that belongs to specified library(-ies).
 
-```lua /plugins/LuaLink/scripts/example_script/init.lua
--- TO-DO
-```
+```lua /plugins/LuaLink/scripts/example_script/main.lua
+local PaperLib = import("io.papermc.lib.PaperLib")
 
-<br />
+script.logger:info("Is the server running Paper? " .. (PaperLib:isPaper() and "YES" or "NO") .. "!")
+```
+```log Console Output
+[00:00:00 INFO]: [LuaLink/example_script] Is the server running Paper? YES!
+```
+While this example may not be the best use of **PaperLib** - especially because **LuaLink** requires you to run the plugin on **Paper** - it is still a good example of how to use external libraries in your scripts.
