@@ -11,6 +11,9 @@ Main script class available in the global scope of each script. Provides access 
 --- Returns the name of the script.
 script.name: string
 
+-- Returns the server instance.
+script.server: Server
+
 --- Returns the script's Logger instance.
 script.logger: Logger
 ```
