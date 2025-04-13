@@ -20,14 +20,18 @@ sup {
 
 aside .simplebar-content-wrapper {
 
-    /* Currently, the first entry is 'Home' and last one is 'Reference' */
-    li:first-child, li:last-child {
+    li:first-child, li:nth-last-child(2) {
         margin-top: 0.75em;
         padding-top: 0.75em;
+        border-top: 1px solid color-mix(in srgb, gray 12.5%, transparent);
+    }
+
+    /* Currently, the first entry is 'Home' and last one is 'Reference' */
+    li:first-child, li:last-child  {
         margin-bottom: 0.75em;
         padding-bottom: 0.75em;
         border-bottom: 1px solid color-mix(in srgb, gray 12.5%, transparent);
-        border-top: 1px solid color-mix(in srgb, gray 12.5%, transparent);
+        
     }
 
 }
