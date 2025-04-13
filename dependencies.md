@@ -17,7 +17,7 @@ return {
     }
 }
 ```
-In this example we will use **[PlaceholderAPI](https://www.spigotmc.org/resources/placeholderapi.19978/)** - a plugin you should already be familiar with.
+In this example we will use **[PlaceholderAPI](https://github.com/PlaceholderAPI/PlaceholderAPI)** - a plugin you should already be familiar with.
 
 <br />
 
