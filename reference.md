@@ -28,7 +28,6 @@ Libraries and utilities exposed to the script environment.
   - :icon-code: [`tonumber`](https://devdocs.io/lua/index#pdf-tonumber)
   - :icon-code: [`tostring`](https://devdocs.io/lua/index#pdf-tostring)
   - :icon-code: [`require`](https://devdocs.io/lua/index#pdf-require)
-  - :icon-code: [`unpack`](https://devdocs.io/lua/index#pdf-table.unpack)
 - **Global Variables**
   - :icon-italic: `script`
   - :icon-italic: `server`
