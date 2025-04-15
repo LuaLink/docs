@@ -13,7 +13,7 @@ Basic **Lua** knowledge is an obvious prerequisite, but it should be relatively 
 - [**:icon-paperclip: Lua** (devdocs.io)](https://devdocs.io/lua/)
 - [**:icon-paperclip: Java 21** (devdocs.io)](https://devdocs.io/openjdk~21/)
 - [**:icon-paperclip: Paper Docs** (docs.papermc.io)](https://docs.papermc.io/paper/dev/api)
-- [**:icon-paperclip: Paper Javadocs** (jd.papermc.io)](https://jd.papermc.io/paper/1.21.4/)
+- [**:icon-paperclip: Paper Javadocs** (jd.papermc.io)](https://jd.papermc.io/paper/1.21.5/)
 
 <br />
 
