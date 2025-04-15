@@ -3,7 +3,7 @@ icon: play
 order: 94
 ---
 # Examples
-In this section you can find some example scripts written with LuaLink. Want to see your script here? **[Submit a PR](https://github.com/LuaLink/docs/pulls)** and we'll add it to the list. 
+In this section you can find some example scripts written with LuaLink. Want to see your script here? **[Submit a PR](https://github.com/LuaLink/docs/pulls)** and we'll consider adding it to the list. 
 
 <br />
 

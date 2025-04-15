@@ -4,69 +4,86 @@ order: 96
 ---
 
 # Libraries
-LuaLink provides a way to load external **Java** libraries for use in your scripts, as well as to define and use external **Lua** libraries.
+LuaLink provides a way to load external **Java** libraries for use in your scripts, as well as to define and use embedded **Lua** libraries.
 
 <br />
 
-<!--
 ## Lua Libraries
-External Lua libraries can be added by creating or copying files to the `/plugins/LuaLink/libs/` folder.
+Lua libraries are almost identical to scripts, but there are a few differences.
+- Each Lua library should be placed in a separate folder in the `/plugins/LuaLink/libs` directory.
+  <sup>For example `/plugins/LuaLink/libs/example/main.lua` will be available as `example` or `example.main`.</sup>
+- Entry point of a Lua library should be always be a `main.lua` file.  
+  <sup>Different entry points are still possible however, and can be imported using a `.` denoted path, for example: `require("my_lib.my_entry_point")`</sup> 
+- Lua Libraries are loaded on demand, using the `require` keyword.  
+  <sup>For example, if we want to use the `example` library in our script, we can import it using the `require("example")`.</sup>
 
-==- Example Lua Library
-```lua **/plugins/LuaLink/libs/example_library/main.lua**
-Counter = {}
+<br />
+
+### Definition
+==- Example Lua Library &ensp;—&ensp; Counter
+```lua /plugins/LuaLink/libs/counter/main.lua
+local Counter = {}
 
 -- Creates a new Counter instance.
 function Counter.new()
-    local self = setmetatable({}, {__index = Counter})
-    self.count = 0
-    return self
+    return {
+        count = 0,
+
+        -- Increments this Counter by 1.
+        increment = function(self)
+            self.count = self.count + 1
+        end,
+
+        -- Decrements this Counter by 1.
+        decrement = function(self)
+            self.count = self.count - 1
+        end,
+
+        -- Returns the current Counter value.
+        get = function(self)
+            return self.count
+        end
+    }
 end
 
--- Increments the counter by one.
-function Counter:increment()
-    self.count = self.count + 1
-end
-
--- Decrements the counter by one.
-function Counter:decrement()
-    self.count = self.count - 1
-end
-
--- Returns the current counter value.
-function Counter:get()
-    return self.count
-end
+return Counter
 ```
 ==-
-
-This is an example of a Counter class that allows you to increment, decrement, and get the current value of a counter.
-
-Now, if you want to use this class in your script, you can import it using the `require` keyword.
-
-```lua /plugins/LuaLink/scripts/example_script/main.lua
-local Counter = require("example_library")
-
-script:onLoad(function()
-    -- Creating a new instance of the Counter class.
-    local counter = Counter:new()
-    -- Incrementing the counter three times.
-    counter:increment()
-    counter:increment()
-    counter:increment()
-    -- Printing current value of the counter to the console.
-    script.logger:info(counter:get() .. " is the current value of the counter.")
-end)
-```
+This is a simple `Counter` class that can be used to increment and decrement a counter.
 
 <br />
 
--->
+### Usage
+
+Now, if we want to use the `Counter` class in our script, we can import it using the `require` keyword.
+```lua /plugins/LuaLink/scripts/example_script/main.lua
+local Counter = require("counter")
+
+-- Creating a new instance of the Counter class.
+local counter = Counter:new()
+-- Incrementing the counter three times.
+counter:increment()
+counter:increment()
+counter:increment()
+-- Decrementing the counter once.
+counter:decrement()
+-- Printing current value of the counter to the console.
+print(counter:get() .. " is the current value.")
+```
+```log Console Output
+[00:00:00 INFO]: [LuaLink/example_script] 2 is the current value.
+```
+
+<br />
+<hr>
+<br />
 
 ## Java Libraries
 External Java/Kotlin libraries can be added by configuring the `/plugins/LuaLink/libraries.json` file. Dependencies will be downloaded and exposed to the scripting runtime after server restart.
 
-### Configuration Example
+<br />
+
+### Configuration
 ```json5 /plugins/LuaLink/libraries.json
 {
     // Repositories to be used for dependency resolution.
@@ -90,6 +107,9 @@ External Java/Kotlin libraries can be added by configuring the `/plugins/LuaLink
 
 In this example, we are adding **[PaperLib](https://github.com/PaperMC/PaperLib)** library of version **1.0.7** from **[PaperMC](https://repo.papermc.io/repository/maven-public/)** repository. You can also see how and authenticate with a private repository using credentials, which might be essential when working with closed-source projects or **[GitHub Packages](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-apache-maven-registry)**.
 
+<br />
+
+### Usage
 After restarting the server, we should be able to import and access any class that belongs to specified library(-ies).
 
 ```lua /plugins/LuaLink/scripts/example_script/main.lua
