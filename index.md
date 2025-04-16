@@ -3,10 +3,6 @@ label: Home
 icon: home
 order: 100
 ---
-!!!danger Important
-This documentation page is still a work in progress and may contain outdated information.
-!!!
-
 # LuaLink v2
 **LuaLink** is an experimental plugin that provides a basic Lua scripting runtime for **Paper-based** Minecraft servers. It is designed for small and simple tasks and serves as a much more powerful alternative to **Skript** and other scripting plugins. 
 
@@ -14,13 +10,28 @@ Scripting runtime is based on **[LuaJava](https://github.com/gudzpoz/luajava)** 
 
 <br />
 
-## Features
-{.list-icon}
-- :icon-code-square: Quick and easy scripting with Lua syntax. 
-- :icon-package: Full access to Bukkit API, built-in libraries and loaded plugins. 
-- :icon-package-dependents: Create your own or load external Java ~~and Lua~~ (work in progress) libraries. 
-- :icon-sync: Loading and unloading of Lua scripts at runtime.
-- :icon-gear: Built-in utilities to simplify common tasks.
+<style>
+    .features {
+        .table-wrapper, td, th {
+            border-color: transparent !important;
+        }
+        .docs-icon {
+            font-size: 1.25em;
+        }
+    }
+</style>
+:::features
+{.compact}
+|                             |     |
+| --------------------------: | --- |
+| :icon-rocket:               | <u>**High Performance**</u><br>LuaLink leverages LuaJava and LuaJIT, which are implemented primarily in C, ensuring fast and efficient execution. |
+| :icon-thumbsup:             | <u>**User-Friendly API**</u><br>Simplifies scripting with an intuitive and easy-to-use API. |
+| :icon-terminal:             | <u>**Simple Command Registration**</u><br>Register commands effortlessly with a single function. |
+| :icon-zap:                  | <u>**Event Listening**</u><br>Listen to Bukkit, Spigot, Paper, or even custom plugin events. |
+| :icon-file:                 | <u>**Script Organization**</u><br>Split scripts into multiple files. Each script requires a `main.lua` entry point but can load additional files using Lua’s `require` function. |
+| :icon-package-dependencies: | <u>**Java Library Integration**</u><br>Extend LuaLink’s capabilities by using any Java library. Whether it’s for a Discord bot, HTTP server, or anything else you can imagine. |
+| :icon-globe:                | <u>**Access Everything**</u><br>Full access to Bukkit API, built-in libraries and loaded plugins. |
+:::
 
 <br />
 
