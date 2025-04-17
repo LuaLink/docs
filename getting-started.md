@@ -122,7 +122,8 @@ end
 
 script:registerCommand(function(sender, args)
     -- Joining arguments to string using space as delimiter.
-    local message = table.concat(args, " ")
+    -- java.luaify(...) function is responsible for converting Java objects to Lua. In this case, it converts String[] to a Lua table.  
+    local message = table.concat(java.luaify(args), " ")
     -- Sending message back to the sender.
     sender:sendRichMessage(message)
 end, {
