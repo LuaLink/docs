@@ -115,7 +115,7 @@ Non-complex commands can be created with little effort using built-in API.
 local Bukkit = import("org.bukkit.Bukkit")
 
 -- Function to handle command tab-completion.
-function onTabComplete(sender, alias, args)
+function onTabComplete(sender, args)
     -- No suggestions will be shown for this command.
     return {}
 end
