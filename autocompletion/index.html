@@ -9,24 +9,24 @@
     <meta name="generator" content="Retype 3.8.1">
 
     <!-- Primary Meta Tags -->
-    <title>Community Libraries</title>
-    <meta name="title" content="Community Libraries">
-    <meta name="description" content="In this section you can find community-made libraries that were written specifically for use with LuaLink. Want to see your project here? ">
+    <title>Auto Completion &amp; IntelliSense</title>
+    <meta name="title" content="Auto Completion & IntelliSense">
+    <meta name="description" content="To enhance your development experience with LuaLink, it is recommended to set up auto completion with IntelliSense.">
 
     <!-- Canonical -->
-    <link rel="canonical" href="/community-libraries/">
+    <link rel="canonical" href="/autocompletion/">
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="/community-libraries/">
-    <meta property="og:title" content="Community Libraries">
-    <meta property="og:description" content="In this section you can find community-made libraries that were written specifically for use with LuaLink. Want to see your project here? ">
+    <meta property="og:url" content="/autocompletion/">
+    <meta property="og:title" content="Auto Completion & IntelliSense">
+    <meta property="og:description" content="To enhance your development experience with LuaLink, it is recommended to set up auto completion with IntelliSense.">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="/community-libraries/">
-    <meta property="twitter:title" content="Community Libraries">
-    <meta property="twitter:description" content="In this section you can find community-made libraries that were written specifically for use with LuaLink. Want to see your project here? ">
+    <meta property="twitter:url" content="/autocompletion/">
+    <meta property="twitter:title" content="Auto Completion & IntelliSense">
+    <meta property="twitter:description" content="To enhance your development experience with LuaLink, it is recommended to set up auto completion with IntelliSense.">
 
     <script data-cfasync="false">(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
@@ -36,6 +36,7 @@
     <script data-cfasync="false" src="../resources/js/config.js?v=3.8.1.801524364372" data-turbo-eval="false" defer></script>
     <script data-cfasync="false" src="../resources/js/retype.js?v=3.8.1" data-turbo-eval="false" defer></script>
     <script id="lunr-js" data-cfasync="false" src="../resources/js/lunr.js?v=3.8.1.801524364372" data-turbo-eval="false" defer></script>
+    <script id="prism-js" data-cfasync="false" src="../resources/js/prism.js?v=3.8.1.801524364372" defer></script>
 
     <style>
 
@@ -241,14 +242,64 @@
                                 <!-- Rendered if sidebar right is enabled -->
                                 <div id="docs-sidebar-right-toggle"></div>
                                 <!-- Page content  -->
-<doc-anchor-target id="community-libraries" class="break-words">
+<doc-anchor-target id="auto-completion--intellisense" class="break-words">
     <h1>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#community-libraries">#</doc-anchor-trigger>
-        <span>Community Libraries</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#auto-completion--intellisense">#</doc-anchor-trigger>
+        <span>Auto Completion &amp; IntelliSense</span>
     </h1>
 </doc-anchor-target>
-<p>In this section you can find community-made libraries that were written specifically for use with LuaLink. Want to see your project here? <strong><a href="https://github.com/LuaLink/docs/pulls">Submit a PR</a></strong> and we&#x27;ll consider adding it to the list.</p>
-<p>Nothing to see here yet.</p>
+<p>To enhance your development experience with LuaLink, it is recommended to set up auto completion with IntelliSense.</p>
+<p>Getting this up and running is really simple. Choose your IDE and follow instructions below:</p>
+<doc-panel id="visual-studio-code-vscodium">
+    <template #title><strong>Visual Studio Code</strong>   |   <strong>VSCodium</strong></template>
+<br>
+<doc-anchor-target id="1-install-lua-extension">
+    <h4>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#1-install-lua-extension">#</doc-anchor-trigger>
+        <span>1. Install Lua Extension</span>
+    </h4>
+</doc-anchor-target>
+<p>Download and install <strong>sumneko Lua</strong> extension. You can do this manually, or use built-in extension manager if available.</p>
+<ul class="list-icon">
+<li><strong>Trusted Sources</strong></li>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=sumneko.lua"><strong><svg xmlns="http://www.w3.org/2000/svg" class="docs-icon" viewBox="0 0 24 24" role="presentation"><g fill="currentColor"><g><path d="M14.78 3.653a3.936 3.936 0 1 1 5.567 5.567l-3.627 3.627a3.936 3.936 0 0 1-5.88-.353.75.75 0 0 0-1.18.928 5.436 5.436 0 0 0 8.12.486l3.628-3.628a5.436 5.436 0 1 0-7.688-7.688l-3 3a.75.75 0 0 0 1.06 1.061l3-3Z"/><path d="M7.28 11.153a3.936 3.936 0 0 1 5.88.353.75.75 0 0 0 1.18-.928 5.436 5.436 0 0 0-8.12-.486L2.592 13.72a5.436 5.436 0 1 0 7.688 7.688l3-3a.75.75 0 1 0-1.06-1.06l-3 3a3.936 3.936 0 0 1-5.567-5.568l3.627-3.627Z"/></g></g></svg> VSCode Marketplace</strong> (marketplace.visualstudio.com)</a></li>
+<li><a href="https://open-vsx.org/extension/sumneko/lua"><strong><svg xmlns="http://www.w3.org/2000/svg" class="docs-icon" viewBox="0 0 24 24" role="presentation"><g fill="currentColor"><g><path d="M14.78 3.653a3.936 3.936 0 1 1 5.567 5.567l-3.627 3.627a3.936 3.936 0 0 1-5.88-.353.75.75 0 0 0-1.18.928 5.436 5.436 0 0 0 8.12.486l3.628-3.628a5.436 5.436 0 1 0-7.688-7.688l-3 3a.75.75 0 0 0 1.06 1.061l3-3Z"/><path d="M7.28 11.153a3.936 3.936 0 0 1 5.88.353.75.75 0 0 0 1.18-.928 5.436 5.436 0 0 0-8.12-.486L2.592 13.72a5.436 5.436 0 1 0 7.688 7.688l3-3a.75.75 0 1 0-1.06-1.06l-3 3a3.936 3.936 0 0 1-5.567-5.568l3.627-3.627Z"/></g></g></svg> Open VSX</strong> (open-vsx.org)</a></li>
+</ul>
+<hr>
+<doc-anchor-target id="2-get-lualink-lls-addon">
+    <h4>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#2-get-lualink-lls-addon">#</doc-anchor-trigger>
+        <span>2. Get LuaLink LLS Addon</span>
+    </h4>
+</doc-anchor-target>
+<p>Clone or download <a href="https://github.com/LuaLink/lualink-lls-addon"><strong>our addon</strong></a>. It contains Lua stubs for common Java and Bukkit types and enables auto-completion of class names.</p>
+<p>Cloning is recommended so you can update it easily.</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-bash"><code v-pre class="language-bash">git clone https://github.com/LuaLink/lualink-lls-addon</code></pre>
+</doc-codeblock></div>
+<p>Updating is as simple as executing <code v-pre>git pull</code> inside the cloned directory.</p>
+<p><strong>Note</strong>: Stubs are based on JDK 21 and latest Paper API snapshot. Repository is updated on daily basis so if recently added API is missing, just pull changes from remote or download and replace files manually.</p>
+<hr>
+<doc-anchor-target id="3-configure-lua-extension">
+    <h4>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#3-configure-lua-extension">#</doc-anchor-trigger>
+        <span>3. Configure Lua Extension</span>
+    </h4>
+</doc-anchor-target>
+<p>The last step is to configure <strong>sumneko Lua</strong> extension to make it recognize and index downloaded Lua stubs, and use our runtime plugin.</p>
+<ul>
+<li>Open the settings for the Lua extension.</li>
+<li>Add a new entry to <code v-pre>Lua.workspace.library</code> and enter the path to your <code v-pre>lualink-lls-addon</code> folder.</li>
+<li>Set <code v-pre>Lua.runtime.plugin</code> to <code v-pre>lualink-lls-addon/plugin.lua</code>.
+<ul>
+<li>This setting requires editing the <code v-pre>settings.json</code> for the extension directly.</li>
+</ul>
+</li>
+</ul>
+<p><strong>Note</strong>: It <em>should</em> be possible to just add the <code v-pre>lualink-lls-addon</code> folder to <code v-pre>Lua.workspace.userThirdParty</code> and have the plugin load only for LuaLink scripts. We could never get this to work however. So if you figure it out - please <a href="https://github.com/LuaLink/docs/issues">open a new issue</a> or <a href="https://discord.gg/xYcjBKqkDz">join our Discord</a>.</p>
+</doc-panel>
+<p><strong>Not working?</strong> <a href="https://discord.gg/xYcjBKqkDz">Join our Discord server</a> and ask for help. We will do our best to help you set it up.</p>
+<!-- Add more IDE instructions below as needed -->
 
                                 
                                 <!-- Required only on API pages -->
@@ -258,23 +309,16 @@
                             
                                 <nav class="flex mt-14">
                                     <div class="w-1/2">
-                                        <a class="px-5 py-4 h-full flex items-center break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-l-lg transition-colors duration-150 relative hover:z-5" href="../examples/">
+                                        <a class="px-5 py-4 h-full flex items-center break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-r rounded-l-lg transition-colors duration-150 relative hover:z-5" href="../community-libraries/">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="mr-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19 11H7.41l5.29-5.29a.996.996 0 10-1.41-1.41l-7 7a1 1 0 000 1.42l7 7a1.024 1.024 0 001.42-.01.996.996 0 000-1.41L7.41 13H19c.55 0 1-.45 1-1s-.45-1-1-1z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
                                             <span>
                                                 <span class="block text-xs font-normal text-gray-400 dark:text-dark-400">Previous</span>
-                                                <span class="block mt-1">Examples</span>
+                                                <span class="block mt-1">Community Libraries</span>
                                             </span>
                                         </a>
                                     </div>
                             
                                     <div class="w-1/2">
-                                        <a class="px-5 py-4 -mx-px h-full flex items-center justify-end break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-r-lg transition-colors duration-150 relative hover:z-5" href="../autocompletion/">
-                                            <span>
-                                                <span class="block text-xs font-normal text-right text-gray-400 dark:text-dark-400">Next</span>
-                                                <span class="block mt-1">Auto Completion & Intelli​Sense</span>
-                                            </span>
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="ml-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19.92 12.38a1 1 0 00-.22-1.09l-7-7a.996.996 0 10-1.41 1.41l5.3 5.3H5c-.55 0-1 .45-1 1s.45 1 1 1h11.59l-5.29 5.29a.996.996 0 000 1.41c.19.2.44.3.7.3s.51-.1.71-.29l7-7c.09-.09.16-.21.21-.33z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
-                                        </a>
                                     </div>
                                 </nav>
                             </footer>
@@ -315,6 +359,6 @@
 
     <div id="docs-overlay-target"></div>
 
-    <script data-cfasync="false">window.__DOCS__ = { "title": "Community Libraries", level: 1, icon: "file", hasPrism: false, hasMermaid: false, hasMath: false, tocDepth: 23 }</script>
+    <script data-cfasync="false">window.__DOCS__ = { "title": "Auto Completion & IntelliSense", level: 1, icon: "file", hasPrism: true, hasMermaid: false, hasMath: false, tocDepth: 23 }</script>
 </body>
 </html>
