@@ -1,0 +1,42 @@
+name: Publish to Codeberg Pages
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  publish:
+    runs-on: codeberg-tiny
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout source
+        uses: https://code.forgejo.org/actions/checkout@v4
+
+      - name: Build with Retype
+        uses: https://github.com/retypeapp/action-build@v3
+        with:
+          output: _build/
+
+      - name: Setup SSH key
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.THE_MACHINE_PRIV }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan codeberg.org >> ~/.ssh/known_hosts
+        shell: bash
+
+      - name: Publish to Codeberg Pages
+        run: |
+          git config --global user.email "github_bot.sf2f6@silomails.com"
+          git config --global user.name "The Machine"
+
+          git clone --depth=1 git@codeberg.org:LuaLink/pages.git _site
+          rm -rf _site/*
+          cp -r _build/* _site/
+
+          cd _site
+          git add .
+          git commit -m "Update site" || echo "No changes"
+          git push origin HEAD:master
