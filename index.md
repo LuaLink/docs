@@ -45,7 +45,6 @@ Plugin can be downloaded from following sources:
 {.list-icon}
 - [**:icon-download: Modrinth** (modrinth.com)](https://modrinth.com/plugin/lualink)
 - [**:icon-download: Hangar** (hangar.papermc.io)](https://hangar.papermc.io/Saturn/LuaLink)
-- [**:icon-download: GitHub Releases** (github.com)](https://github.com/LuaLink/LuaLinkV2/releases)
 
 <br />
 
