@@ -15,13 +15,13 @@ jobs:
         uses: https://code.forgejo.org/actions/checkout@v4
 
       - name: Build site with Retype
-        uses: retypeapp/action-build@latest
+        uses: https://github.com/retypeapp/action-build@v3
         id: build1
 
       - name: Setup SSH key
         run: |
           mkdir -p ~/.ssh
-          echo "${{ secrets.DEPLOY_KEY }}" > ~/.ssh/id_rsa
+          echo "${{ secrets.THE_MACHINE_PRIV }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan codeberg.org >> ~/.ssh/known_hosts
         shell: bash
