@@ -14,29 +14,34 @@ jobs:
       - name: Checkout source
         uses: https://code.forgejo.org/actions/checkout@v4
 
-      - name: Build with Retype
-        uses: https://github.com/retypeapp/action-build@v3
-        with:
-          output: _build/
+      - name: Build site with Retype
+        uses: retypeapp/action-build@latest
+        id: build1
 
       - name: Setup SSH key
         run: |
           mkdir -p ~/.ssh
-          echo "${{ secrets.THE_MACHINE_PRIV }}" > ~/.ssh/id_rsa
+          echo "${{ secrets.DEPLOY_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan codeberg.org >> ~/.ssh/known_hosts
         shell: bash
 
       - name: Publish to Codeberg Pages
+        shell: bash
+        env:
+          RETYPE_OUTPUT: ${{ steps.build1.outputs.retype-output-path }}
         run: |
           git config --global user.email "github_bot.sf2f6@silomails.com"
           git config --global user.name "The Machine"
 
+          echo "Cloning Pages repo..."
           git clone --depth=1 git@codeberg.org:LuaLink/pages.git _site
+
+          echo "Replacing contents..."
           rm -rf _site/*
-          cp -r _build/* _site/
+          cp -r "$RETYPE_OUTPUT"/* _site/
 
           cd _site
           git add .
-          git commit -m "Update site" || echo "No changes"
+          git commit -m "Update site" || echo "No changes to commit"
           git push origin HEAD:master
