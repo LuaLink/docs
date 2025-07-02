@@ -94,7 +94,7 @@ local Bukkit = import("org.bukkit.Bukkit")
 local Keyed = import("net.kyori.adventure.key.Keyed")
 local NamespacedKey = import("org.bukkit.NamespacedKey")
 
-script.onLoad(function()
+script:onLoad(function()
     -- Creating new instance of NamespacedKey class.
     local key = NamespacedKey("minecraft", "overworld")
     -- Getting instance of the primary world.
