@@ -38,6 +38,8 @@ Scripting runtime is based on **[LuaJava](https://github.com/gudzpoz/luajava)** 
 ## Installation
 Before you begin, make sure you have met the following requirements:
 - **[Paper](https://papermc.io/)** based server running **1.20** or higher, and **Java 21**.  
+- System or container environment with **[glibc 2.34](https://en.wikipedia.org/wiki/Glibc)** or higher.  
+  <sup>For example **Debian 12**, **Ubuntu 22.04**, **CentOS 9** and newer.</sup>
 - Basic understanding of **Lua** scripting and general programming concepts is beneficial.
 
 Plugin can be downloaded from following sources:
